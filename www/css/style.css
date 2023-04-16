@@ -1,0 +1,188 @@
+body,
+input,
+textarea,
+select {
+    font-family: 'Montserrat', sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1 {
+    font-size: 50px;
+    text-align: center;
+    /* text-transform: uppercase; */
+}
+@media screen and (max-width: 450px){
+    h1 {
+        font-size: 30px;
+    }
+}
+h2 {
+    font-size: 26px;
+    text-align: center;
+    text-transform: uppercase;
+}
+@media screen and (max-width: 450px){
+    h2 {
+        font-size: 20px;
+    }
+}
+a {
+    color: #000;
+    text-decoration: none;
+}
+/*
+a, .socIkony i, input {
+    transition: 0.3s all ease-in-out;
+}
+*/
+a:hover {
+    color: #b30000;
+    text-decoration: underline;
+}
+img,
+iframe {
+    vertical-align: top;
+    transition: 0.3s all ease-in-out;
+}
+
+.funkacer {
+    width: 95%;
+    margin: auto;
+    text-align: center;
+    min-height: 200px;
+}
+
+.funkacer ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 10px;
+    list-style: none;
+    padding: 20px 0;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    background: #eaeaea;
+    border-radius: 100px;
+}
+
+.hello {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.hello ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 20px 0;
+}
+
+@media screen and (max-width: 450px){
+    .hello ul {
+        flex-direction: column;
+    }
+}
+
+.navig {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+.navig ul {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 20px 0;
+    margin: 10px 0;
+    row-gap: 20px;
+}
+
+.menu {
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    min-height: 200px;
+}
+
+.menu ul {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 20px 0;
+    margin: 10px 0;
+    row-gap: 20px;
+}
+
+.menu ul li a {
+    text-transform: uppercase;
+    padding: 0 5px 10px;
+}
+
+@media screen and (max-width: 450px){
+    .menu ul {
+        flex-direction: column;
+    }
+}
+
+div.flash {
+	color: black;
+	background: #FFF9D7;
+	border: 1px solid #E2C822;
+	padding: 1em;
+	margin: 1em 0;
+}
+
+/*
+.menu ul {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+    padding: 20px 0;
+}
+
+body {
+	font: 16px/1.5 Georgia, Verdana, Arial;
+	margin: 0 auto;
+	width: 600px;
+	color: #333;
+	background-color: #fff;
+}
+
+
+
+a[href^="#error:"] {
+	background: red;
+	color: white;
+}
+
+form th, form td {
+	vertical-align: top;
+	font-weight: normal;
+}
+
+form th {
+	text-align: right;
+}
+
+form .required label {
+	font-weight: bold;
+}
+
+form .error {
+	color: #D00;
+	font-weight: bold;
+}
