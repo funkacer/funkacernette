@@ -1,0 +1,61 @@
+{block content}
+        
+        <h1 style="margin:auto;margin-top: -20px; margin-bottom: 20px;">Úřednická zkouška</h1>
+
+        {var $label[1] = "id"}
+        {var $label[2] = "Otázka"}
+        {var $label[3] = "Odpověď a)"}
+        {var $label[4] = "Odpověď b)"}
+        {var $label[5] = "Odpověď c)"}
+
+        {var $keys[1] = "id"}
+        {var $keys[2] = "otazka"}
+        {var $keys[3] = "odpoved_a"}
+        {var $keys[4] = "odpoved_b"}
+        {var $keys[5] = "odpoved_c"}
+        
+        {var $prevId = $myId - 1}
+        {var $nextId = $myId + 1}
+
+        <div style = "width:80%; margin:auto;">
+        {if true}
+            {*zde echujeme začátek tabulky*}
+            <table border = '1' cellspacing = '0' cellpadding = '5'>
+
+            {for $row = 1; $row <= 5; $row++}
+                <tr>
+                {*cyklus pro sloupce*}
+                {for $column = 1; $column <= 2; $column++}
+                    {*první sloupec nebo řádek tučně*}
+                    {if $column == 1}
+                        <th style = "white-space:nowrap; padding:15px; text-align:center">{$label[$row]}</th>
+                    {else}
+                        {if ($row == 2)}
+                            <td style = "padding:15px;font-weight:bold;">{$rowData[$keys[$row]]}</td>
+                        {elseif ($showAnswer && ($row == 3 && $rowData['spravna_odpoved'] == 'a' || $row == 4 && $rowData['spravna_odpoved'] == 'b' || $row == 5 && $rowData['spravna_odpoved'] == 'c'))}
+                            <td style="background-color:#77DD77; padding:15px;">{$rowData[$keys[$row]]}</td>
+                        {else}
+                            <td style = "padding:15px;">{$rowData[$keys[$row]]}</td>
+                        {/if}
+                    {/if}
+                {/for}
+                </tr>
+            {/for}
+
+            </table>
+
+        {/if}
+        </div>
+
+        <div style = "width:80%; margin:auto; margin-top: 30px; text-align: center;display: flex; flex-wrap: wrap; justify-content: space-around;">
+            <a n:if="!$showAnswer" n:href="Uz: $myId, 1, $randomId, 0" style="background-color:powderblue;padding:15px; margin: 5px;">&lt;&lt; Předchozí otázka</a>
+            <a n:if="$showAnswer" n:href="Uz: $prevId, 0, $randomId, 0" style="background-color:powderblue;padding:15px; margin: 5px;">&lt;&lt; Předchozí otázka</a>
+            <a n:if="!$showAnswer" n:href="Uz: $myId, abs($showAnswer - 1), $randomId, 0" style="background-color:#77DD77;padding:15px; margin: 5px;">Ukaž odpověď</a>
+            <a n:if="$showAnswer" n:href="Uz: -1, abs($showAnswer - 1), $randomId, 0" style="background-color:#77DD77;padding:15px; margin: 5px;">Ukaž odpověď</a>
+            <a n:if="$randomId" n:href="Uz: $myId, 0, abs($randomId - 1), 0" style="background-color:lightgrey;padding:15px; margin: 5px;">Náhodně</a>
+            <a n:if="!$randomId" n:href="Uz: $myId, 0, abs($randomId - 1), 0" style="background-color:lightred;padding:15px; margin: 5px;">Náhodně</a>
+            <a n:if="!$showAnswer" n:href="Uz: $myId, 1, $randomId, 0" style="background-color:salmon;padding:15px; margin: 5px;">Další otázka &gt;&gt;</a>
+            <a n:if="$showAnswer" n:href="Uz: $nextId, 0, $randomId, 0" style="background-color:salmon;padding:15px; margin: 5px;">Další otázka &gt;&gt;</a>
+            <a n:if="!$showAnswer" n:href="Uz: $myId, 1, $randomId, 0" style="background-color:pink;padding:15px; margin: 5px;">Historie</a>
+            <a n:if="$showAnswer" n:href="Uz: $myId, 0, $randomId, 1" style="background-color:pink;padding:15px; margin: 5px;">Historie</a>
+        </div>

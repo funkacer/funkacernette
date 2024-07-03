@@ -90,7 +90,8 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 			'penzion' => new Thumbnail ("penzion", "Prima-penzion", "black", "primapenzion-main.jpg", "https://funkacer.cz/prima-penzion/", 3),
 			'prevodnik' => new Thumbnail ("prevodnik", "Převodník teplot", "black", "temp_picture.png", "PrevodnikTeplot:default", 4),
 			'nasobilka' => new Thumbnail ("nasobilka", "Malá násobilka", "black", "nasobilka_picture.png", "MalaNasobilka:default", 5),
-			'strom' => new Thumbnail ("strom", "Strom produktů", "black", "strom_picture.png", "Strom:default", 6)
+			'strom' => new Thumbnail ("strom", "Strom produktů", "black", "strom_picture.png", "Strom:default", 6),
+			'uz' => new Thumbnail ("uz", "Úřednická zkouška", "black", "uz_picture.png", "Uz:default", 7)
 		];
 		$this->template->poleThumbnails = $poleThumbnails;
 

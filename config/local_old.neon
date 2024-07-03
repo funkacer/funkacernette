@@ -1,4 +1,0 @@
-database:
-	dsn: 'mysql:host=localhost;dbname=funkacernette;charset=utf8'
-	user: funkacernette
-	password: G1oZ8tCoDV
