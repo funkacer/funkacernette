@@ -24,7 +24,7 @@ final class PrevodnikTeplotPresenter extends Nette\Application\UI\Presenter
                 //pokud je parametr číslo, provedeme výpočet
                 $this->stupneC = $_POST["stupne-c"];
                 //funkce z libmatika
-                $this->stupneF = $this->model->cNaF($this->stupneC);
+                $this->stupneF = round($this->model->cNaF($this->stupneC), 5);
             } else {
                 //jinak vytvoříme proměnnou chyba
                 $this->flashMessage("Zadali jste špatný data pro stupně C.", "danger");
@@ -37,7 +37,7 @@ final class PrevodnikTeplotPresenter extends Nette\Application\UI\Presenter
                 //pokud je parametr číslo, provedeme výpočet
                 $this->stupneF = $_POST["stupne-f"];
                 //funkce z libmatika
-                $this->stupneC = $this->model->fNaC($this->stupneF);
+                $this->stupneC = round($this->model->fNaC($this->stupneF), 5);
             } else {
                 //jinak vytvoříme proměnnou chyba
                 $this->flashMessage("Zadali jste špatný data pro stupně F.", "danger");

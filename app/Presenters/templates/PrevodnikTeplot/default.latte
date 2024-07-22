@@ -1,17 +1,20 @@
 {block content}
 
-<h1>Úkol převodník teplot</h1>
+<div class="funkacer">
 
-<form action="" method="post">
-    <label for="c">Stupně C</label>
-    <input type="text" name="stupne-c" id="c" value = {$stupneC}>
+    <h1>Úkol převodník teplot</h1>
 
-    <label for="f">Stupně F</label>
-    <input type="text" name="stupne-f" id="f" value = {$stupneF}>
+    <form action="" method="post" style = "margin-top: 20px;">
+        <label for="c">Stupně C:&nbsp;</label>
+        <input type="text" name="stupne-c" id="c" value = {$stupneC} style = "margin-right: 20px; text-align: right; width: 100px; padding-right: 10px;">
 
-    <hr>
-    <input type="submit" name="submit-c" value="C -> F">
-    <input type="submit" name="submit-f" value="F -> C">
+        <label for="f">Stupně F:&nbsp;</label>
+        <input type="text" name="stupne-f" id="f" value = {$stupneF} style = "margin-right: 20px; text-align: right; width: 100px; padding-right: 10px;">
 
-</form>
+        <hr>
+        <input type="submit" name="submit-c" value="C -> F" style = "margin-right: 20px;">
+        <input type="submit" name="submit-f" value="F -> C" style = "margin-right: 20px;">
 
+    </form>
+
+</div>
