@@ -21,7 +21,7 @@ final class GopasPresenter extends Nette\Application\UI\Presenter
 
 
 
-    public function renderDefault(int $myId = -1, $showAnswer = 0, $randomId = 0, $zpet = 0): void {
+    public function renderDefault(): void {
         //do something
 
         $allData = $this->model->getAllData();
