@@ -515,8 +515,8 @@ final class WeatherModel
 	}
 
     public function getApi() {
-        //return \Nette\Neon\Neon::decode(file_get_contents('../home/app/schema/openweathermap.neon'));
-        return \Nette\Neon\Neon::decode(file_get_contents('../app/schema/openweathermap.neon'));   
+        return \Nette\Neon\Neon::decode(file_get_contents('../home/app/schema/openweathermap.neon'));
+        //return \Nette\Neon\Neon::decode(file_get_contents('../app/schema/openweathermap.neon'));   
     }
 
 	function getWeatherForecast($mesto) {
