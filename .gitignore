@@ -1,0 +1,4 @@
+/vendor
+/config/local_server.neon
+/app/schema/openweathermap.neon
+/www/weather-app_old

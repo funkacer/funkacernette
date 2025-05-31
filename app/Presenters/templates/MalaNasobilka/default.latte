@@ -1,0 +1,39 @@
+{block content}
+
+<div class="funkacer">
+
+    <h1>Úkol malá násobilka</h1>
+
+    <form action="" method="get" style = "margin-top: 20px;">
+        <label for="radky">Zadejte počet řádků:&nbsp;</label>
+        <input type="text" name="rows" id="radky" value = {$rows} style = "margin-right: 20px; text-align: right; width: 100px; padding-right: 10px;">
+        <label for="sloupce">Zadejte počet sloupců:&nbsp;</label>
+        <input type="text" name="cols" id="sloupce" value = {$cols} style = "margin-right: 20px; text-align: right; width: 100px; padding-right: 10px;">
+        <input type="submit" name="submit" value="Vytvořit tabulku">
+        <hr />
+    </form>
+
+        {if isset($rows) && isset($cols)}
+            {*zde echujeme začátek tabulky*}
+            <table border = '1' cellspacing = '0' cellpadding = '5 px'>
+
+            {*cyklus pro řádky*}
+            {for $row = 1; $row <= $rows; $row++}
+                <tr>
+                {*cyklus pro sloupce*}
+                {for $column = 1; $column <= $cols; $column++}
+                    {*první sloupec nebo řádek tučně*}
+                    {if $row == 1 || $column == 1}
+                        <td style = "padding:5px;text-align:center;"><b>{$row*$column}</b></td>
+                    {else}
+                        <td style = "padding:5px;text-align:center;">{$row*$column}</td>
+                    {/if}
+                {/for}
+                </tr>
+            {/for}
+
+            </table>
+
+        {/if}
+
+</div>

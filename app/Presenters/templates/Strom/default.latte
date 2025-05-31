@@ -1,0 +1,288 @@
+{* Latte template *}
+
+{block content}
+
+	<style>
+		p {
+    		margin: 1px 0;
+			display: flex;
+		}
+
+	</style>
+
+	<div class="d-flex justify-content-center">
+		{*control testInfo*}
+	</div>
+
+	<form method="POST" action="">
+
+		<div class="d-flex p-2">
+
+			<div id = "moje" class="col-6">
+					
+						<table class="table table-striped">
+							<tbody class="invoice-data">
+							<tr>
+								<th class = "align-middle" scope="row">Odkud</th>
+								<td>
+									<label for="l-search" id = "l-label-search" style = "margin: 0 5px;">Hledat:</label>
+									<input type="text" id="l-search" name="l-search">
+									<a href = "#" id = "l-do-search" style = "margin: 0 5px; padding: 5px 5px; background-color: lightgreen; border-radius: 5px">Hledej</a>
+								</td>
+								<td class = "align-middle">
+									<label for="l-colors" style = "margin: 0 5px;">Zvýraznění:</label>
+									<select name="l-colors" id="l-colors">
+									<option value="lightgreen">Zelená</option>
+									<option value="lightblue">Modrá</option>
+									<option value="yellow">Žlutá</option>
+									<option value="coral">Červená</option>
+									</select>
+								</td>
+								<td class = "align-middle">
+									<a href = "#" id = "l-reset-search" style = "margin: 0 5px; padding: 5px 5px; background-color: red; border-radius: 5px">Reset</a>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+
+						<table class="table table-striped">
+							<tr>
+								<td>
+									{foreach $poleUzlu as $cesta => $uzel}
+										<p id = "l{$cesta}" class = "l-sign" style="height: 0; margin: 0; visibility:hidden">
+										<span n:if="$uzel['hasChild']"><i class="fas fa-minus" style="color:blue"></i></span>
+										<span n:if="!$uzel['hasChild']"><i class="fas fa-minus" style="visibility:hidden"></i></span>
+										{var $i}
+										{for $i; $i < $uzel["hladina"]; $i++ }
+										<span>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										</span>
+										{/for}
+										<label><input type="checkbox" name="od[]" value="{$uzel["id"]}"> {$uzel["nazev"]}</label>
+										</p>
+									{/foreach}
+								</td>
+							</tr>
+						</table>
+
+			</div>
+
+			<div class="col-6">
+				
+						<table class="table table-striped">
+							<tbody class="invoice-data">
+							<tr>
+								<th class = "align-middle" scope="row">Kam</th>
+								<td class = "align-middle">
+									<label for="r-search" id = "r-label-search" style = "margin: 0 5px;">Hledat:</label>
+									<input type="text" id="r-search" name="r-search">
+									<a href = "#" id = "r-do-search" style = "margin: 0 5px; padding: 5px 5px; background-color: lightgreen; color: white; border-radius: 5px">Hledej</a>
+								</td>
+								<td class = "align-middle">
+									<label for="r-colors" style = "margin: 0 5px;">Zvýraznění:</label>
+									<select name="r-colors" id="r-colors">
+									<option value="lightgreen">Zelená</option>
+									<option value="lightblue">Modrá</option>
+									<option value="yellow">Žlutá</option>
+									<option value="coral">Červená</option>
+									</select>
+								</td>
+								<td class = "align-middle">
+									<a href = "#" id = "l-reset-search" style = "margin: 0 5px; padding: 5px 5px; background-color: red; color: white; border-radius: 5px">Reset</a>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+
+						<table class="table table-striped">
+							<tr>
+								<td>
+									{foreach $poleUzlu as $cesta => $uzel}
+										<p id = "r{$cesta}" class = "r-sign" style="height: 0; margin: 0; visibility:hidden">
+										<span n:if="$uzel['hasChild']"><i class="fas fa-minus" style="color:blue"></i></span>
+										<span n:if="!$uzel['hasChild']"><i class="fas fa-minus" style="visibility:hidden"></i></span>
+										{var $i}
+										{for $i; $i < $uzel["hladina"]; $i++ }
+										<span>
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										</span>
+										{/for}
+										<label><input type = "radio" name="do" value = "{$uzel["id"]}"> {$uzel["nazev"]}</label>
+										</p>
+									{/foreach}
+								</td>
+							</tr>
+						</table>
+				
+			</div>
+
+		</div>
+
+		<br />
+		<div class="row d-flex justify-content-center">
+			<input class="btn btn-success" type="submit" name = "strom-submit" value="Pokračovat">
+		</div>
+
+	</form>
+
+	<br><br><br>
+
+<script>
+
+	const signs = [".l-sign", ".r-sign"];
+	const searchTriggers = ["#l-do-search", "#r-do-search"];
+	const searchTexts = ["l-search", "r-search"];
+	const searchLabels = ["l-label-search", "r-label-search"];
+	const searchColors = ["#l-colors", "#r-colors"];
+
+	for (let indexLeftRight = 0; indexLeftRight < 2; indexLeftRight++) {
+
+		//start logika
+		$(signs[indexLeftRight]).each(function(){
+			//pokud je úroveň do 3 vč. (jedno / je navíc) tak zobraz standardně minus pro možnost složit
+			if (this.id.split("/").length <= 4) {
+				this.style.visibility = "visible";
+				this.style.height = "auto";
+				//margin jako nahore ve style
+				this.style.margin = "1px 0";
+			}
+			//pokud je úroveň nad 3 (jedno / je navíc) tak zobraz + a označ jako složené (toggleClass("plus"))
+			if (this.id.split("/").length >= 4) {
+				$(this).find('i').each(function(){
+					$(this).removeClass("fa-minus");
+					$(this).addClass("fa-plus");
+				});
+				$(this).toggleClass("plus");
+			}
+		});
+
+		//onlick inkony
+		$(signs[indexLeftRight]).each(function(){
+			$(this).find('i').on("click", (e) => {
+			//plus znamena ze je splacnuty
+			const id = this.id
+			//console.log(id);
+			if (!$(this).hasClass("plus")) {
+				$(e.currentTarget).removeClass("fa-minus");
+				$(e.currentTarget).addClass("fa-plus");
+				$(signs[indexLeftRight]).each(function(){
+					//console.log(this.id);
+					if (this.id.substr(0, id.length) == id && this.id != id) {
+						this.style.visibility = "hidden";
+						this.style.height = "0";
+						this.style.margin = "0";
+					}
+				});
+				//$("#moje").load(" #moje > *");
+			} else {
+				$(e.currentTarget).removeClass("fa-plus");
+				$(e.currentTarget).addClass("fa-minus");
+				let paths = [];
+				//paths.push(e.currentTarget.id);
+				$(signs[indexLeftRight]).each(function(){
+					//console.log(this.id);
+					if (this.id.substr(0, id.length) == id && this.id != id) {
+						makeVisible = true;
+						if ($(this).hasClass("plus")) {
+							if (!paths.includes(this.id)) {
+								paths.push(this.id);
+							}
+						}
+						for (let path of paths) {
+							if (this.id.substr(0, path.length) == path && this.id != path) {
+								makeVisible = false;
+							}
+						}
+						if (makeVisible) {
+							this.style.visibility = "visible";
+							this.style.height = "auto";
+							//margin jako nahore ve style
+							this.style.margin = "1px 0";
+						}
+					}
+				});
+			}
+			$(this).toggleClass("plus");
+			});
+		});
+	
+		//search
+		$(searchTriggers[indexLeftRight]).on("click", () => {
+			const color = document.getElementById(searchTriggers[indexLeftRight].substr(1)).style.backgroundColor
+			const find = document.getElementById(searchTexts[indexLeftRight]).value.toLowerCase();
+			if (find != "") {
+				let nalezeno = 0;
+				let searchPaths = [];
+				$(signs[indexLeftRight]).each(function(){
+					let id = this.id;
+					$(this).find('label').each(function(){
+						let text = this.innerHTML.substr(this.innerHTML.lastIndexOf("> ")+2).toLowerCase();
+						if (text.indexOf(find) > -1) {
+							//console.log(text + id);
+							this.style.backgroundColor = color;
+							nalezeno++;
+							if (!searchPaths.includes(id)) {
+								searchPaths.push(id);
+							}
+						}
+					});
+				});
+				if (nalezeno) {
+					document.getElementById(searchLabels[indexLeftRight]).innerHTML = "Nalezeno " + nalezeno;
+				} else {
+					document.getElementById(searchLabels[indexLeftRight]).innerHTML = "Nenalezeno";
+				}
+				//console.log(searchPaths);
+				for (let searchPath of searchPaths) {
+					//console.log(searchPath);
+					//this.style.color = "green";
+					$(signs[indexLeftRight]).each(function(){
+						if (searchPath.substr(0, this.id.length) == this.id && searchPath != this.id) {
+							if ($(this).hasClass("plus")) {
+								$(this).find('i').each(function(){
+									$(this).removeClass("fa-plus");
+									$(this).addClass("fa-minus");
+								});
+								$(this).toggleClass("plus");
+							}
+						}
+					});
+				}
+				let paths = [];
+				$(signs[indexLeftRight]).each(function(){
+					//toto by mělo ukázat když má mít rozbalené podsložky ale hrozně zpomaluje
+					makeVisible = true;
+					if ($(this).hasClass("plus")) {
+						if (!paths.includes(this.id)) {
+							paths.push(this.id);
+						}
+					}
+					for (let path of paths) {
+						if (this.id.substr(0, path.length) == path && this.id != path) {
+							makeVisible = false;
+						}
+					}
+					if (makeVisible) {
+						this.style.visibility = "visible";
+						this.style.height = "auto";
+						//margin jako nahore ve style
+						this.style.margin = "1px 0";
+					}
+				});
+			} else {
+				document.getElementById(searchLabels[indexLeftRight]).innerHTML = "Prázdné pole";
+			}
+		});
+
+		$(searchColors[indexLeftRight]).on("change", (e) => {
+			const color = e.currentTarget.value;
+			$(searchTriggers[indexLeftRight]).each(function(){
+				this.style.backgroundColor = color;
+			});
+
+
+		});
+	
+	}
+	
+</script>

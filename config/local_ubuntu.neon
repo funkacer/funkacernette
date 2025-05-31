@@ -1,0 +1,4 @@
+database:
+	dsn: 'mysql:host=127.0.0.1:3306;dbname=funkacernette'
+	user: root
+	password: pass
